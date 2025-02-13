@@ -1,4 +1,4 @@
-LOGIN = wkonings
+LOGIN = guzzy
 ENV_FILE = ./srcs/.env
 
 # Load .env file to access DOMAIN_NAME variable

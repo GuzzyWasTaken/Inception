@@ -1,0 +1,23 @@
+# srcs/requirements/mariadb/conf/50-server.cnf
+[mysqld]
+user                    = mysql
+pid-file               = /var/run/mysqld/mysqld.pid
+socket                 = /var/run/mysqld/mysqld.sock
+port                   = 3306
+basedir                = /usr
+datadir                = /var/lib/mysql
+tmpdir                 = /tmp
+bind-address           = 0.0.0.0
+
+character-set-server   = utf8mb4
+collation-server       = utf8mb4_general_ci
+
+# InnoDB Configuration
+innodb_buffer_pool_size = 256M
+innodb_log_file_size   = 64M
+innodb_flush_method    = O_DIRECT
+innodb_flush_log_at_trx_commit = 1
+
+# Connection and Thread Settings
+max_connections        = 100
+thread_cache_size     = 128

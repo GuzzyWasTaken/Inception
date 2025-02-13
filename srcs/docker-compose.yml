@@ -3,26 +3,26 @@ version: '3.8'
 services:
   nginx:
     build:
-      context: ./srcs/requirements/nginx
+      context: ./requirements/nginx
     container_name: nginx
     ports:
       - "443:443"
     networks:
       - inception_network
-    depends_on:
-      - wordpress
+  #  depends_on:
+    #  - wordpress
     volumes:
-      - /home/${LOGIN}/data/wordpress:/var/www/html/wordpress
+      - /home/${USER}/data/wordpress:/var/www/html/wordpress
     restart: always
 
   wordpress:
     build:
-      context: ./srcs/requirements/wordpress
+      context: ./requirements/wordpress
     container_name: wordpress
     networks:
       - inception_network
     volumes:
-      - /home/${LOGIN}/data/wordpress:/var/www/html/wordpress
+      - /home/${USER}/data/wordpress:/var/www/html/wordpress
     environment:
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=${DB_USER}
@@ -34,12 +34,12 @@ services:
 
   mariadb:
     build:
-      context: ./srcs/requirements/mariadb
+      context: ./requirements/mariadb
     container_name: mariadb
     networks:
       - inception_network
     volumes:
-      - /home/${LOGIN}/data/mariadb:/var/lib/mysql
+      - /home/${USER}/data/mariadb:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
       - MYSQL_DATABASE=${DB_NAME}
