@@ -15,35 +15,44 @@ services:
       - /home/${USER}/data/wordpress:/var/www/html/wordpress
     restart: always
 
-  wordpress:
-    build:
-      context: ./requirements/wordpress
-    container_name: wordpress
-    networks:
-      - inception_network
-    volumes:
-      - /home/${USER}/data/wordpress:/var/www/html/wordpress
-    environment:
-      - WORDPRESS_DB_HOST=mariadb
-      - WORDPRESS_DB_USER=${DB_USER}
-      - WORDPRESS_DB_PASSWORD=${DB_PASS}
-      - WORDPRESS_DB_NAME=${DB_NAME}
-    depends_on:
-      - mariadb
-    restart: always
+  # wordpress:
+  #   build:
+  #     context: ./requirements/wordpress
+  #   container_name: wordpress
+  #   networks:
+  #     - inception_network
+  #   volumes:
+  #     - /home/${USER}/data/wordpress:/var/www/html/wordpress
+  #   environment:
+  #     - WORDPRESS_DB_HOST=mariadb
+  #     - WORDPRESS_DB_USER=${DB_USER}
+  #     - WORDPRESS_DB_PASSWORD=${DB_PASS}
+  #     - WORDPRESS_DB_NAME=${DB_NAME}
+  #   depends_on:
+  #     - mariadb
+  #   restart: always
 
   mariadb:                                                        # The database service (MariaDB).
-        build: requirements/mariadb                               # Builds the image from a Dockerfile located in "requirements/mariadb"
         container_name: mariadb                                   # Names the container "mariadb" for easier reference
-        restart: unless-stopped                                   # Restarts the container automatically unless explicitly stopped
+        build: ./requirements/mariadb                             # Builds the image from a Dockerfile located in "requirements/mariadb"
+        image: mariadb
+        restart: on-failure                                       # Restarts the container automatically unless explicitly stopped
         env_file:
               - .env                                              # Loads environment variables from the ".env" file
         volumes: 
-              - /home/${USER}/data/mariadb:/var/lib/mysql                           # Bind the mariadb volume to the MySQL data directory in the container (Ensures the MySQL database persists across container restarts)
+              - mariadb_v:/var/lib/mysql                           # Bind the mariadb volume to the MySQL data directory in the container (Ensures the MySQL database persists across container restarts)
         networks:
               - inception_network   
 
-
+volumes:
+  mariadb_v:
+    name: mariadb_v
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${USER}/data/mariadb
+    
 networks:
   inception_network:
     driver: bridge

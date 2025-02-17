@@ -9,6 +9,8 @@ RUN sed -i "s|skip-networking|#skip-networking|g" /etc/my.cnf.d/mariadb-server.c
 RUN mariadb-install-db --user=mysql --datadir=/var/lib/mysql --skip-test-db
 
 COPY ./tools/config.sh /config.sh
+COPY ./conf/50-server.conf /50-server.conf
+RUN chmod +x /50-server.conf
 RUN chmod +x /config.sh
 
 EXPOSE 3306

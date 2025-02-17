@@ -1,10 +1,15 @@
-#!bin/sh
+#!/bin/sh
 
 chown -R mysql:mysql /var/lib/mysql /run/mysqld
 
 sleep 5
 
-if [ ! -d "/var/lib/mysql/${DB_NAME}" ]; then
+if [ ! -d "/var/lib/mysql/mysql/${DB_NAME}" ]; then
+    echo "Initializing system database..."
+    mariadb-install-db --user=mysql --datadir=/var/lib/mysql --auth-root-authentication-method=normal
+fi
+
+#if [ ! -d "/var/lib/mysql/${DB_NAME}" ]; then
 
 cat << EOF > /tmp/db.sql
 USE mysql;
