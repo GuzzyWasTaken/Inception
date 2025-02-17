@@ -32,20 +32,17 @@ services:
       - mariadb
     restart: always
 
-  mariadb:
-    build:
-      context: ./requirements/mariadb
-    container_name: mariadb
-    networks:
-      - inception_network
-    volumes:
-      - /home/${USER}/data/mariadb:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
-      - MYSQL_DATABASE=${DB_NAME}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASS}
-    restart: always
+  mariadb:                                                        # The database service (MariaDB).
+        build: requirements/mariadb                               # Builds the image from a Dockerfile located in "requirements/mariadb"
+        container_name: mariadb                                   # Names the container "mariadb" for easier reference
+        restart: unless-stopped                                   # Restarts the container automatically unless explicitly stopped
+        env_file:
+              - .env                                              # Loads environment variables from the ".env" file
+        volumes: 
+              - /home/${USER}/data/mariadb:/var/lib/mysql                           # Bind the mariadb volume to the MySQL data directory in the container (Ensures the MySQL database persists across container restarts)
+        networks:
+              - inception_network   
+
 
 networks:
   inception_network:
