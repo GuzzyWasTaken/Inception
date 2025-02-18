@@ -15,22 +15,22 @@ services:
       - /home/${USER}/data/wordpress:/var/www/html/wordpress
     restart: always
 
-  # wordpress:
-  #   build:
-  #     context: ./requirements/wordpress
-  #   container_name: wordpress
-  #   networks:
-  #     - inception_network
-  #   volumes:
-  #     - /home/${USER}/data/wordpress:/var/www/html/wordpress
-  #   environment:
-  #     - WORDPRESS_DB_HOST=mariadb
-  #     - WORDPRESS_DB_USER=${DB_USER}
-  #     - WORDPRESS_DB_PASSWORD=${DB_PASS}
-  #     - WORDPRESS_DB_NAME=${DB_NAME}
-  #   depends_on:
-  #     - mariadb
-  #   restart: always
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+    container_name: wordpress
+    networks:
+      - inception_network
+    volumes:
+      - /home/${USER}/data/wordpress:/var/www/html/wordpress
+    environment:
+      - WORDPRESS_DB_HOST=mariadb
+      - WORDPRESS_DB_USER=${DB_USER}
+      - WORDPRESS_DB_PASSWORD=${DB_PASS}
+      - WORDPRESS_DB_NAME=${DB_NAME}
+    depends_on:
+      - mariadb
+    restart: always
 
   mariadb:                                                        # The database service (MariaDB).
         container_name: mariadb                                   # Names the container "mariadb" for easier reference

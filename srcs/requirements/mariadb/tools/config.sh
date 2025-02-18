@@ -1,18 +1,12 @@
-#!/bin/sh
+#!bin/sh
 
 chown -R mysql:mysql /var/lib/mysql /run/mysqld
 
 sleep 5
 
-# Ensure the system database exists
-if [ ! -d "/var/lib/mysql/mysql" ]; then
-    echo "Initializing system database..."
-    mariadb-install-db --user=mysql --datadir=/var/lib/mysql --auth-root-authentication-method=normal
-fi
-
-# Check if the database exists before creating it
 if [ ! -d "/var/lib/mysql/${DB_NAME}" ]; then
-    cat << EOF > /tmp/db.sql
+
+cat << EOF > /tmp/db.sql
 USE mysql;
 FLUSH PRIVILEGES;
 DELETE FROM mysql.user WHERE User='';
@@ -23,10 +17,10 @@ CREATE USER '${DB_USER}'@'%' IDENTIFIED by '${DB_PASS}';
 GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
-    mariadbd --user=mysql --bootstrap < /tmp/db.sql
-    rm -f /tmp/db.sql
+	mariadbd --user=mysql --bootstrap < /tmp/db.sql
+	rm -f /tmp/db.sql
 else
-    echo "Database already exists"
+	echo "Database already exists"
 fi
 
 exec mariadbd --user=mysql --bind-address=0.0.0.0
