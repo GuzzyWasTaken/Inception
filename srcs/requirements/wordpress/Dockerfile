@@ -13,7 +13,7 @@ ENV WP_USER_EMAIL=${WP_USER_EMAIL}
 
 # Update & intstall your package manager
 RUN apt-get update -y && \
-    apt-get -y install php8.2 php-fpm php-mysql mariadb-client wget curl sendmail
+    apt-get -y install apt-utils php8.2 php-fpm php-mysql mariadb-client wget curl
 
 # Create necessary directories
 RUN  mkdir -p /run/php

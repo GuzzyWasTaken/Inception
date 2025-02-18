@@ -6,13 +6,19 @@ touch /run/php/php8.2-fpm.pid
 chown -R www-data:www-data /var/www/*
 chmod -R 755 /var/www/*
 
+sed -i "s/listen = 127.0.0.1:9000/listen = 9000/g" /etc/php81/php-fpm.d/www.conf
+
 # Download/Install WordPress if not already present
 if [ ! -f /var/www/html/wordpress/wp-config.php ]; then
     cd /var/www/html/wordpress
 
+    wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    chmod +x wp-cli.phar
+    mv wp-cli.phar /usr/local/bin/wp
+
     # Download WordPress
     echo "Downloading WordPress..."
-    wp core download \
+    php -d memory_limit-512M /usr/local/bin/wp core download \
         --path="/var/www/html/wordpress/" \
         --allow-root
     echo "WordPress downloaded."
