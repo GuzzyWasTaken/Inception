@@ -21,7 +21,7 @@ services:
     networks:
       - inception_network
     volumes:
-      - /home/g/data/wordpress:/var/www/html/wordpress
+      - wordpress_v:/var/www/html
     environment:
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=${DB_USER}
