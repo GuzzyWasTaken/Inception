@@ -3,6 +3,7 @@ services:
     build:
       context: ./requirements/nginx
     container_name: nginx
+    image: nginx
     ports:
       - "443:443"
     networks:
@@ -18,6 +19,7 @@ services:
     build:
       context: ./requirements/wordpress
     container_name: wordpress
+    image: wordpress
     networks:
       - inception_network
     volumes:
