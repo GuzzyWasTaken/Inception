@@ -12,7 +12,7 @@ services:
     depends_on:
      - wordpress
     volumes:
-      - /home/guzzy/data/wordpress:/var/www/html/wordpress
+      - /home/${USER}/data/wordpress:/var/www/html/wordpress
     restart: always
     env_file: .env
 
@@ -23,7 +23,7 @@ services:
     networks:
       - inception_network
     volumes:
-      - /home/guzzy/data/wordpress:/var/www/html/wordpress
+      - /home/${USER}/data/wordpress:/var/www/html/wordpress
     environment:
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=${DB_USER}
@@ -53,7 +53,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/guzzy/data/mariadb
+      device: /home/${USER}/data/mariadb
     
 networks:
   inception_network:
