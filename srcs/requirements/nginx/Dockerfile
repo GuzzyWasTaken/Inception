@@ -9,7 +9,6 @@ RUN apk add --no-cache nginx openssl bash
 
 # Copy configuration files
 COPY conf/nginx.conf /etc/nginx/nginx.conf
-# COPY conf/default.conf /etc/nginx/conf.d/default.conf
 
 # Generate SSL certificates (self-signed for testing purposes)
 RUN mkdir -p /etc/nginx/ssl && \
