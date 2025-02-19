@@ -12,7 +12,7 @@ services:
     depends_on:
      - wordpress
     volumes:
-      - /home/${USER}/data/wordpress:/var/www/html/wordpress
+      - wordpress_v:/var/www/html
     restart: always
     env_file: .env
 
@@ -23,7 +23,7 @@ services:
     networks:
       - inception_network
     volumes:
-      - /home/${USER}/data/wordpress:/var/www/html/wordpress
+      - /home/g/data/wordpress:/var/www/html/wordpress
     environment:
       - WORDPRESS_DB_HOST=mariadb
       - WORDPRESS_DB_USER=${DB_USER}
@@ -53,8 +53,16 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/${USER}/data/mariadb
-    
+      device: /home/g/data/mariadb
+
+  wordpress_v:
+    name: wordpress_v
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/g/data/wordpress
+
 networks:
   inception_network:
     driver: bridge

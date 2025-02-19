@@ -29,7 +29,7 @@ all: check_domain_name
 		echo "$(DOMAIN_NAME) is already in /etc/hosts"; \
 	fi; \
 
-	sudo docker-compose -f ./srcs/docker-compose.yml up --build
+	sudo docker compose -f ./srcs/docker-compose.yml up --build
 
 check_domain_name:
 	@if [ -z "$(DOMAIN_NAME)" ]; then \
@@ -39,7 +39,7 @@ check_domain_name:
 	fi
 
 down:
-	sudo docker-compose -f ./srcs/docker-compose.yml down
+	sudo docker compose -f ./srcs/docker-compose.yml down
 
 reset:
 	@if [ -d "/home/$(LOGIN)/data/wordpress" ]; then \
@@ -53,7 +53,7 @@ reset:
 	fi;
 
 fclean:
-	sudo docker-compose -f ./srcs/docker-compose.yml down --rmi all -v
+	sudo docker compose -f ./srcs/docker-compose.yml down --rmi all -v
 	@if [ -d "/home/$(LOGIN)/data/wordpress" ]; then \
 		sudo rm -rf /home/$(LOGIN)/data/wordpress && \
 		echo "successfully removed all contents from /home/$(LOGIN)/data/wordpress/"; \
