@@ -38,7 +38,8 @@ services:
     container_name: mariadb                                   # Names the container "mariadb" for easier reference
     build: ./requirements/mariadb                             # Builds the image from a Dockerfile located in "requirements/mariadb"
     image: mariadb
-    restart: always                                         
+    restart: always     
+    env_file:                                    
       - .env                                              # Loads environment variables from the ".env" file
     volumes: 
       - mariadb_v:/var/lib/mysql                           # Bind the mariadb volume to the MySQL data directory in the container (Ensures the MySQL database persists across container restarts)

@@ -29,12 +29,12 @@ all: check_domain_name
 		echo "$(DOMAIN_NAME) is already in /etc/hosts"; \
 	fi; \
 
-	sudo docker compose -d -f ./srcs/docker-compose.yml up --build
+	sudo docker compose -d -f ./srcs/docker-compose.yml up -d --build
 
 check_domain_name:
 	@if [ -z "$(DOMAIN_NAME)" ]; then \
 		echo "DOMAIN_NAME is not set in the .env file!" \
-		"\nPlease run 'make env' to create it. Don't forget to set values!"; \
+		"\nPlease run 'copy-env' to create it. Don't forget to set values!"; \
 		exit 1; \
 	fi
 
