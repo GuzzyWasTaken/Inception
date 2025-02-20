@@ -95,14 +95,14 @@ env:
 	@echo "DB_USER_PASSWORD=default" >> $(ENV_FILE)
 	@echo "\n" >> $(ENV_FILE)
 	@echo "# WORDPRESS ADMIN" >> $(ENV_FILE)
-	@echo "WP_ADMIN=guzzy" >> $(ENV_FILE)
-	@echo "WP_ADMIN_PASSWORD=guzzy123" >> $(ENV_FILE)
-	@echo "WP_ADMIN_EMAIL=guzzy@gmail.com" >> $(ENV_FILE)
+	@echo "WP_ADMIN=Default" >> $(ENV_FILE)
+	@echo "WP_ADMIN_PASSWORD=Default" >> $(ENV_FILE)
+	@echo "WP_ADMIN_EMAIL=default@email.com" >> $(ENV_FILE)
 	@echo "\n" >> $(ENV_FILE)
 	@echo "# WORDPRESS USER" >> $(ENV_FILE)
-	@echo "WP_USER=bob" >> $(ENV_FILE)
-	@echo "WP_USER_PASSWORD=bob123" >> $(ENV_FILE)
-	@echo "WP_USER_EMAIL=bob@gmail.com" >> $(ENV_FILE)
+	@echo "WP_USER=Default_user" >> $(ENV_FILE)
+	@echo "WP_USER_PASSWORD=default" >> $(ENV_FILE)
+	@echo "WP_USER_EMAIL=defaultuser@email.com" >> $(ENV_FILE)
 	@echo ".env file created successfully! Remember to set the variables..."
 
 .PHONY: all, clean, fclean, re, ls
