@@ -78,34 +78,7 @@ ls:
 	sudo docker image ls
 	sudo docker ps
 
-env:
-	@echo "Creating .env file in ./srcs/.env"
-	@echo "# GENERAL" > $(ENV_FILE)
-	@echo "DOMAIN_NAME=auzochuk.42.fr" >> $(ENV_FILE)
-	@echo "\n" >> $(ENV_FILE)
-	@echo "# DATA BASES" >> $(ENV_FILE)
-	@echo "WP_DATABASE_NAME=wordpress" >> $(ENV_FILE)
-	@echo "WP_DATABASE_HOST=mariadb" >> $(ENV_FILE)
-	@echo "\n" >> $(ENV_FILE)
-	@echo "# MARIADB DATABASE" >> $(ENV_FILE)
-	@echo "DB_ROOT_PASSWORD=default_type" >> $(ENV_FILE)
-	@echo "DB_NAME=wordpress" >> $(ENV_FILE)
-	@echo "DB_PASS=default" >> $(ENV_FILE)
-	@echo "DB_USER=default" >> $(ENV_FILE)
-	@echo "DB_USER_PASSWORD=default" >> $(ENV_FILE)
-	@echo "\n" >> $(ENV_FILE)
-	@echo "# WORDPRESS ADMIN" >> $(ENV_FILE)
-	@echo "WP_ADMIN=Default" >> $(ENV_FILE)
-	@echo "WP_ADMIN_PASSWORD=Default" >> $(ENV_FILE)
-	@echo "WP_ADMIN_EMAIL=default@email.com" >> $(ENV_FILE)
-	@echo "\n" >> $(ENV_FILE)
-	@echo "# WORDPRESS USER" >> $(ENV_FILE)
-	@echo "WP_USER=Default_user" >> $(ENV_FILE)
-	@echo "WP_USER_PASSWORD=default" >> $(ENV_FILE)
-	@echo "WP_USER_EMAIL=defaultuser@email.com" >> $(ENV_FILE)
-	@echo ".env file created successfully! Remember to set the variables..."
-
 copy-env:
-	cp ~/.transcendence.env ./srcs/.env
+	cp ~/.env srcs/.env
 
 .PHONY: all, clean, fclean, re, ls
