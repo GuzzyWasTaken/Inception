@@ -29,7 +29,7 @@ all: check_domain_name
 		echo "$(DOMAIN_NAME) is already in /etc/hosts"; \
 	fi; \
 
-	sudo docker compose -d -f ./srcs/docker-compose.yml up -d --build
+	sudo docker compose -f ./srcs/docker-compose.yml up -d --build
 
 check_domain_name:
 	@if [ -z "$(DOMAIN_NAME)" ]; then \
