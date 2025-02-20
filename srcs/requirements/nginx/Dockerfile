@@ -1,5 +1,5 @@
 # Use Alpine Linux for a lightweight image
-FROM alpine:3.19
+FROM alpine:3.20
 
 # Set environment variables
 ENV DOMAIN_NAME=${DOMAIN_NAME}

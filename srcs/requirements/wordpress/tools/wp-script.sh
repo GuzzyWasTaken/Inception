@@ -2,11 +2,11 @@
 
 # Create necessary directories and set permissions
 mkdir -p /var/www/html/wordpress
-touch /run/php/php8.2-fpm.pid
+touch /run/php/php7.4-fpm.pid
 chown -R www-data:www-data /var/www/*
 chmod -R 755 /var/www/*
 
-sed -i "s/listen = 127.0.0.1:9000/listen = 9000/g" /etc/php81/php-fpm.d/www.conf
+# sed -i "s/listen = 127.0.0.1:9000/listen = 9000/g" /etc/php81/php-fpm.d/www.conf
 
 # Download/Install WordPress if not already present
 if [ ! -f /var/www/html/wordpress/wp-config.php ]; then
@@ -65,4 +65,4 @@ fi
 
 # Start PHP-FPM in the foreground
 echo "Starting PHP-FPM..."
-exec /usr/sbin/php-fpm8.2 -F
+exec /usr/sbin/php-fpm7.4 -F

@@ -29,7 +29,7 @@ all: check_domain_name
 		echo "$(DOMAIN_NAME) is already in /etc/hosts"; \
 	fi; \
 
-	sudo docker compose -f ./srcs/docker-compose.yml up --build
+	sudo docker compose -d -f ./srcs/docker-compose.yml up --build
 
 check_domain_name:
 	@if [ -z "$(DOMAIN_NAME)" ]; then \
@@ -104,5 +104,8 @@ env:
 	@echo "WP_USER_PASSWORD=default" >> $(ENV_FILE)
 	@echo "WP_USER_EMAIL=defaultuser@email.com" >> $(ENV_FILE)
 	@echo ".env file created successfully! Remember to set the variables..."
+
+copy-env:
+	cp ~/.transcendence.env ./srcs/.env
 
 .PHONY: all, clean, fclean, re, ls
